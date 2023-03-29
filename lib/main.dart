@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:syuryou_test/tuika.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('ja_JP', null); // 追加
   runApp(const MyApp());
 }
 
@@ -119,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -127,6 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           TableCalendar(
+            locale: 'ja_JP',
             firstDay: DateTime.utc(2022, 4, 1),
             lastDay: DateTime.utc(2025, 12, 31),
             eventLoader: getEvent,
